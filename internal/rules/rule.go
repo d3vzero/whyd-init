@@ -151,7 +151,7 @@ func Load(sources ...Source) (*Set, error) {
 				}
 				continue
 			}
-			fmt.Fprintf(h, "%s\x00%s\x00", src.Name+"/"+name, data)
+			_, _ = fmt.Fprintf(h, "%s\x00%s\x00", src.Name+"/"+name, data)
 			var f ruleFile
 			var raw struct {
 				Rules []map[string]any `toml:"rule"`
@@ -366,7 +366,7 @@ func (r *Rule) checkTemplates() error {
 	}
 	for _, t := range []struct{ field, text string }{{"title", r.Title}, {"note", r.Note}, {"merge_title", r.MergeTitle}} {
 		for _, m := range placeholder.FindAllStringSubmatch(t.text, -1) {
-			if !names[m[1]] && !(m[1] == "count" && t.field == "merge_title") {
+			if !names[m[1]] && (m[1] != "count" || t.field != "merge_title") {
 				if hint := suggest(m[1], names); hint != "" {
 					return fmt.Errorf("%s uses {%s}, but no pattern has a group named %s%s", t.field, m[1], m[1], hint)
 				}

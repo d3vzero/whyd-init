@@ -86,7 +86,7 @@ func saveNew(base, ext, text string) (string, error) {
 			return "", err
 		}
 		if _, err := f.WriteString(text); err != nil {
-			f.Close()
+			_ = f.Close()
 			return "", err
 		}
 		return name, f.Close()
@@ -235,7 +235,7 @@ func (m *model) reportText() string {
 	if m.redacted {
 		red = report.NewRedactor(res)
 	}
-	report.Markdown(&b, res, red)
+	_ = report.Markdown(&b, res, red) // a bytes.Buffer never fails to write
 	return b.String()
 }
 

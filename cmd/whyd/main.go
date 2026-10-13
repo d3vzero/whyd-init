@@ -280,8 +280,7 @@ func runOpen(ctx context.Context, index int, file string, asText bool, from time
 		return err
 	}
 	if asText {
-		report.Text(os.Stdout, res)
-		return nil
+		return report.Text(os.Stdout, res)
 	}
 	src := ui.Source{Skipped: len(s.rules.Problems), Since: from, Boots: s.boots}
 	if file == "" {
@@ -306,8 +305,7 @@ func runReport(ctx context.Context, index int, file string, raw bool) error {
 	if !raw {
 		red = report.NewRedactor(res)
 	}
-	report.Markdown(os.Stdout, res, red)
-	return nil
+	return report.Markdown(os.Stdout, res, red)
 }
 
 func runList(ctx context.Context, onlyUnclean bool, since time.Time) error {

@@ -100,8 +100,12 @@ func TestScreensFit(t *testing.T) {
 			}
 			if dir := os.Getenv("WHYD_DUMP"); dir != "" { // WHYD_DUMP=dir writes every screen there
 				base := filepath.Join(dir, fmt.Sprintf("whyd-%s-%dx%d", st.name, size[0], size[1]))
-				os.WriteFile(base+".txt", []byte(ansi.Strip(out)), 0o644)
-				os.WriteFile(base+".ansi", []byte(out), 0o644)
+				if err := os.WriteFile(base+".txt", []byte(ansi.Strip(out)), 0o644); err != nil {
+					t.Error(err)
+				}
+				if err := os.WriteFile(base+".ansi", []byte(out), 0o644); err != nil {
+					t.Error(err)
+				}
 			}
 		}
 	}

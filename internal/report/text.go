@@ -10,8 +10,14 @@ import (
 )
 
 // Text writes the summary as plain text, for pipes, SSH sessions and scripts.
-func Text(w io.Writer, r *analyze.Result) {
-	p := func(format string, a ...any) { fmt.Fprintf(w, format, a...) }
+// It returns the first error from w.
+func Text(w io.Writer, r *analyze.Result) error {
+	var werr error // the first write error, later writes are skipped
+	p := func(format string, a ...any) {
+		if werr == nil {
+			_, werr = fmt.Fprintf(w, format, a...)
+		}
+	}
 
 	p("whyd: %s, %s (%s)\n\n", SessionName(r), Span(r), Length(r))
 	p("end     %s\n", r.Verdict.Summary)
@@ -60,6 +66,7 @@ func Text(w io.Writer, r *analyze.Result) {
 		label, facts = "kernel", append([]string{r.Kernel}, facts...)
 	}
 	p("%-7s %s\n", label, strings.Join(facts, ", "))
+	return werr
 }
 
 // Plural writes "1 suspend", "2 suspends".

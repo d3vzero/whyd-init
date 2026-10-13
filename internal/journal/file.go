@@ -17,7 +17,7 @@ func SystemReadable() bool {
 		files, _ := filepath.Glob(filepath.Join(dir, "*", "system.journal"))
 		for _, f := range files {
 			if fh, err := os.Open(f); err == nil {
-				fh.Close()
+				_ = fh.Close()
 				return true
 			}
 		}
@@ -38,7 +38,7 @@ func ReadFile(path string, fn func(Entry) error) error {
 		if err != nil {
 			return err
 		}
-		defer file.Close()
+		defer func() { _ = file.Close() }()
 		f = file
 	}
 	br := bufio.NewReader(f)
@@ -49,6 +49,6 @@ func ReadFile(path string, fn func(Entry) error) error {
 	if err != nil {
 		return err
 	}
-	defer gz.Close()
+	defer func() { _ = gz.Close() }()
 	return Read(gz, fn)
 }

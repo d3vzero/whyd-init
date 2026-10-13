@@ -55,7 +55,9 @@ func load(t *testing.T, name string) *analyze.Result {
 
 func TestMarkdown(t *testing.T) {
 	var b bytes.Buffer
-	Markdown(&b, freeze(t), newRedactor([]string{"archlinux"}, []string{"user"}))
+	if err := Markdown(&b, freeze(t), newRedactor([]string{"archlinux"}, []string{"user"})); err != nil {
+		t.Fatal(err)
+	}
 	out := b.String()
 	for _, want := range []string{
 		"- **end:** no shutdown, journal stops at 12:11:56; nothing abnormal logged after 11:57",
@@ -79,7 +81,9 @@ func TestMarkdown(t *testing.T) {
 
 func TestText(t *testing.T) {
 	var b bytes.Buffer
-	Text(&b, freeze(t))
+	if err := Text(&b, freeze(t)); err != nil {
+		t.Fatal(err)
+	}
 	out := b.String()
 	for _, want := range []string{
 		"end     no shutdown, journal stops at 12:11:56",
@@ -144,7 +148,9 @@ func TestMarkdownRedactsSources(t *testing.T) {
 	r.Unknown = append([]analyze.UnknownGroup{{Source: "user", Message: "a | b ``` c", Priority: 3, Count: 1}}, r.Unknown...)
 	r.Tail = append(r.Tail, analyze.TailLine{Entry: journal.Entry{Time: r.Boot.Last, Source: "user", Message: "done ```"}})
 	var b bytes.Buffer
-	Markdown(&b, r, newRedactor([]string{"archlinux"}, []string{"user"}))
+	if err := Markdown(&b, r, newRedactor([]string{"archlinux"}, []string{"user"})); err != nil {
+		t.Fatal(err)
+	}
 	out := b.String()
 	if strings.Contains(out, "| user |") || strings.Contains(out, " user: done") {
 		t.Errorf("source not redacted:\n%s", out)

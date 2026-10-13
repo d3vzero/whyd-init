@@ -12,7 +12,7 @@ func TestReadExport(t *testing.T) {
 	// a message with a newline and an escape is written in binary form
 	msg := "line one\n\x1b[1mline two"
 	b.WriteString("PRIORITY=6\nSYSLOG_IDENTIFIER=kernel\n_COMM=swapper\n_TRANSPORT=kernel\nMESSAGE\n")
-	binary.Write(&b, binary.LittleEndian, uint64(len(msg)))
+	_ = binary.Write(&b, binary.LittleEndian, uint64(len(msg)))
 	b.WriteString(msg + "\nMESSAGE=second copy, ignored\n\n")
 	var got []Entry
 	if err := ReadExport(&b, func(e Entry) error { got = append(got, e); return nil }); err != nil {

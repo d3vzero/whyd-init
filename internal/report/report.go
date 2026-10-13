@@ -60,14 +60,20 @@ func Size(kb int64) string {
 
 // Markdown writes the report to paste on a forum: absolute dates, a table, the last lines.
 // With red nil, nothing is hidden.
-func Markdown(w io.Writer, r *analyze.Result, red *Redactor) {
+// It returns the first error from w.
+func Markdown(w io.Writer, r *analyze.Result, red *Redactor) error {
 	clean := func(s string) string {
 		if red == nil {
 			return s
 		}
 		return red.Redact(s)
 	}
-	p := func(format string, a ...any) { fmt.Fprintf(w, format, a...) }
+	var werr error // the first write error, later writes are skipped
+	p := func(format string, a ...any) {
+		if werr == nil {
+			_, werr = fmt.Fprintf(w, format, a...)
+		}
+	}
 
 	p("## whyd: %s\n\n", SessionName(r))
 	p("- **when:** %s to %s (%s)", r.Boot.First.Format("Mon 2 Jan 15:04"), r.Boot.Last.Format("Mon 2 Jan 15:04"), Length(r))
@@ -148,6 +154,7 @@ func Markdown(w io.Writer, r *analyze.Result, red *Redactor) {
 		note = "addresses, serial numbers, hostname, users and network names redacted"
 	}
 	p("_whyd %s, %s_\n", Version, note)
+	return werr
 }
 
 // cell makes text safe inside a Markdown table cell.
