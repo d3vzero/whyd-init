@@ -13,6 +13,9 @@ import (
 // silently shows only the user's own messages, and every verdict would be wrong. It is true
 // when no journal file is found (nothing to check: journalctl will say what's wrong).
 func SystemReadable() bool {
+	if useSyslog() {
+		return syslogReadable()
+	}
 	for _, dir := range []string{"/var/log/journal", "/run/log/journal"} {
 		files, _ := filepath.Glob(filepath.Join(dir, "*", "system.journal"))
 		for _, f := range files {

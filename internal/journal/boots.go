@@ -38,6 +38,9 @@ type rawBoot struct {
 
 // ListBoots returns every boot in the journal, oldest first.
 func ListBoots(ctx context.Context) ([]Boot, error) {
+	if useSyslog() {
+		return listBootsSyslog()
+	}
 	out, err := exec.CommandContext(ctx, "journalctl", "--list-boots", "-o", "json", "--no-pager").Output()
 	if err != nil {
 		// on a non-zero exit, journalctl explains why on stderr: keep it in the error

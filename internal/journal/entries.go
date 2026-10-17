@@ -44,6 +44,9 @@ type Selection struct {
 // --all is given, losing crash stack traces). The boot is selected by its ID, so the index
 // shifting after a reboot can't mix them up.
 func ReadBoot(ctx context.Context, b Boot, sel *Selection, fn func(Entry) error) error {
+	if useSyslog() { // small files, read whole: the selection only saves journalctl's time
+		return readBootSyslog(b, fn)
+	}
 	fields := "--output-fields=" + outputFields
 	if sel == nil || b.Last.IsZero() {
 		return export(ctx, fn, "-b", b.ID, fields)

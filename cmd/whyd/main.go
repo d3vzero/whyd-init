@@ -200,9 +200,7 @@ type session struct {
 
 func newSession(ctx context.Context, withBoots bool) (*session, error) {
 	if withBoots && !journal.SystemReadable() {
-		return nil, errors.New("you can only read your own messages, not the system journal.\n" +
-			"Run whyd with sudo, or add yourself to the systemd-journal group and log in again:\n" +
-			"  sudo usermod -aG systemd-journal $USER")
+		return nil, errors.New(journal.AccessHint())
 	}
 	set, err := loadRules()
 	if err != nil {
