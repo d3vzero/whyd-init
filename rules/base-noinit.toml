@@ -1,0 +1,86 @@
+# Named to sort before desktop.toml: its specific rules must come before broad ones such as
+# bluetooth.error, which takes every bluetoothd line (the first rule that fits takes a line).
+# Systems without systemd (Artix with dinit or runit, read from syslog): messages every boot or
+# every shutdown writes there, and logins refused by sudo, which journald would tag as authpriv.
+
+[[rule]]
+id      = "auth.not-in-sudoers"
+level   = "info"
+source  = "sudo"
+text    = "{user} : user NOT in sudoers"
+title   = "sudo refused: {user} is not an administrator"
+note    = "an account without admin rights tried sudo"
+explain = """
+An account that is not in the sudoers file (on these systems: not in the wheel group) ran
+sudo, and sudo refused. Expected for a shared or public account; for an account you don't
+know, see what it tried to run (the COMMAND part of the line).
+"""
+match   = [
+  "AI-Trainer : user NOT in sudoers ; TTY=pts/2 ; PWD=/home/AI-Trainer ; USER=root ; COMMAND=/usr/bin/tail -n 5 /home/user/update.log",
+]
+
+# At shutdown the services stop in turn: the ones still running then complain that what they
+# talk to (D-Bus, the dispatcher, a Bluetooth link) is already gone.
+[[rule]]
+id     = "hidden.shutdown-elogind"
+level  = "hidden"
+text   = [
+  "elogind[{_}]: Received signal 15 [TERM]",
+  "elogind is already running as PID",
+  "pam_elogind({_}): Failed to connect to system bus",
+]
+title  = "elogind messages while stopping"
+match  = [
+  "elogind[674]: Received signal 15 [TERM]",
+  "elogind is already running as PID 675",
+  "pam_elogind(login:session): Failed to connect to system bus: No such file or directory",
+]
+
+[[rule]]
+id     = "hidden.nm-dispatcher-closed"
+level  = "hidden"
+source = "NetworkManager"
+text   = "dispatcher: ({_}) failed (after {_} sec): The connection is closed"
+title  = "NetworkManager dispatcher closed at shutdown"
+match  = ["<warn>  [1792237297.6834] dispatcher: (13) failed (after 0.000 sec): The connection is closed"]
+
+[[rule]]
+id     = "hidden.bt-acl-unknown"
+level  = "hidden"
+source = "kernel"
+text   = "Bluetooth: hci{_}: ACL packet for unknown connection handle"
+title  = "Bluetooth packets for a closed link"
+match  = ["Bluetooth: hci0: ACL packet for unknown connection handle 1"]
+
+# Every boot, harmless.
+[[rule]]
+id     = "hidden.nm-p2p-forwarding"
+level  = "hidden"
+source = "NetworkManager"
+text   = "device (p2p-dev-{_}): error setting IPv4 forwarding"
+title  = "Wi-Fi P2P device forwarding notices"
+match  = ["<warn>  [1792234543.7986] device (p2p-dev-wlan0): error setting IPv4 forwarding to '0': Resource temporarily unavailable"]
+
+[[rule]]
+id     = "hidden.nm-no-modemmanager"
+level  = "hidden"
+source = "NetworkManager"
+text   = "modem-manager: error poking ModemManager"
+title  = "ModemManager not installed"
+match  = ["<warn>  [1792234543.7598] modem-manager: error poking ModemManager: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.ModemManager1 was not provided by any .service files"]
+
+[[rule]]
+id     = "hidden.nvme-nguid"
+level  = "hidden"
+source = "kernel"
+text   = "No UUID available providing old NGUID"
+title  = "NVMe drive without a UUID"
+match  = ["block nvme1n1: No UUID available providing old NGUID"]
+
+[[rule]]
+id     = "hidden.bluez-lastused"
+level  = "hidden"
+source = "bluetoothd"
+text   = "Unable to load LastUsed"
+title  = "Bluetooth audio endpoint not remembered"
+match  = ["profiles/audio/a2dp.c:load_remote_sep() Unable to load LastUsed: rseid 1 not found"]

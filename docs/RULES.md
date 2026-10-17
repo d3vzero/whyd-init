@@ -440,6 +440,14 @@ Context rules take their lines without listing a problem; hidden lines are count
 | `memory.oom-kill` | memory.toml | err | out of memory, {process} killed |
 | `memory.oomd-kill` | memory.toml | err | systemd-oomd killed {cgroup} |
 | `memory.alloc-trouble` | memory.toml | warn | {process}: page allocation {what} |
+| `auth.not-in-sudoers` | base-noinit.toml | info | sudo refused: {user} is not an administrator |
+| `hidden.shutdown-elogind` | base-noinit.toml | hidden | elogind messages while stopping |
+| `hidden.nm-dispatcher-closed` | base-noinit.toml | hidden | NetworkManager dispatcher closed at shutdown |
+| `hidden.bt-acl-unknown` | base-noinit.toml | hidden | Bluetooth packets for a closed link |
+| `hidden.nm-p2p-forwarding` | base-noinit.toml | hidden | Wi-Fi P2P device forwarding notices |
+| `hidden.nm-no-modemmanager` | base-noinit.toml | hidden | ModemManager not installed |
+| `hidden.nvme-nguid` | base-noinit.toml | hidden | NVMe drive without a UUID |
+| `hidden.bluez-lastused` | base-noinit.toml | hidden | Bluetooth audio endpoint not remembered |
 | `service.dumped` | service.toml | context | (context) |
 | `service.core-dump` | service.toml | context | (context) |
 | `service.failed` | service.toml | warn | {unit} failed: {result} |
