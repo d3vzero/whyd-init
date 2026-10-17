@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/vmaltarello/whyd/internal/journal"
-	"github.com/vmaltarello/whyd/internal/rules"
+	"github.com/d3vzero/whyd-init/internal/journal"
+	"github.com/d3vzero/whyd-init/internal/rules"
 )
 
 // Input is what an analysis needs: the boot, how to read its entries, and the rules.

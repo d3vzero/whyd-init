@@ -8,9 +8,9 @@ import (
 	"testing/fstest"
 	"time"
 
-	"github.com/vmaltarello/whyd/internal/journal"
-	"github.com/vmaltarello/whyd/internal/rules"
-	builtin "github.com/vmaltarello/whyd/rules"
+	"github.com/d3vzero/whyd-init/internal/journal"
+	"github.com/d3vzero/whyd-init/internal/rules"
+	builtin "github.com/d3vzero/whyd-init/rules"
 )
 
 func run(t *testing.T, name string) *Result {

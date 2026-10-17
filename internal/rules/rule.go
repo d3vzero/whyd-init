@@ -20,8 +20,8 @@ import (
 
 	"github.com/BurntSushi/toml"
 
-	"github.com/vmaltarello/whyd/internal/journal"
-	builtin "github.com/vmaltarello/whyd/rules"
+	"github.com/d3vzero/whyd-init/internal/journal"
+	builtin "github.com/d3vzero/whyd-init/rules"
 )
 
 // Level is what whyd does with the lines of a rule, from least to most visible.

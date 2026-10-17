@@ -6,11 +6,11 @@ import (
 	"path/filepath"
 	"testing/fstest"
 
-	"github.com/vmaltarello/whyd/internal/rules"
-	builtin "github.com/vmaltarello/whyd/rules"
+	"github.com/d3vzero/whyd-init/internal/rules"
+	builtin "github.com/d3vzero/whyd-init/rules"
 )
 
-const rulesGuide = "https://github.com/vmaltarello/whyd/blob/main/docs/RULES.md"
+const rulesGuide = "https://github.com/d3vzero/whyd-init/blob/main/docs/RULES.md"
 
 // runRules lists the rules in use, built in and the user's, and checks them: the mistakes that
 // made whyd skip a rule, examples that don't do what they say, rules that can never fire. With

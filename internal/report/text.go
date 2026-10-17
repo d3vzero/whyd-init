@@ -6,7 +6,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/vmaltarello/whyd/internal/analyze"
+	"github.com/d3vzero/whyd-init/internal/analyze"
 )
 
 // Text writes the summary as plain text, for pipes, SSH sessions and scripts.

@@ -9,8 +9,8 @@ import (
 	"testing"
 	"testing/fstest"
 
-	"github.com/vmaltarello/whyd/internal/journal"
-	builtin "github.com/vmaltarello/whyd/rules"
+	"github.com/d3vzero/whyd-init/internal/journal"
+	builtin "github.com/d3vzero/whyd-init/rules"
 )
 
 func loadBuiltin(t *testing.T) *Set {

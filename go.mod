@@ -1,4 +1,4 @@
-module github.com/vmaltarello/whyd
+module github.com/d3vzero/whyd-init
 
 go 1.26.0
 

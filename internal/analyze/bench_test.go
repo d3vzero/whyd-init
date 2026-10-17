@@ -3,8 +3,8 @@ package analyze
 import (
 	"testing"
 
-	"github.com/vmaltarello/whyd/internal/journal"
-	"github.com/vmaltarello/whyd/internal/rules"
+	"github.com/d3vzero/whyd-init/internal/journal"
+	"github.com/d3vzero/whyd-init/internal/rules"
 )
 
 func BenchmarkRun(b *testing.B) {

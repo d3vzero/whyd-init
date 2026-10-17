@@ -6,8 +6,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/vmaltarello/whyd/internal/journal"
-	"github.com/vmaltarello/whyd/internal/rules"
+	"github.com/d3vzero/whyd-init/internal/journal"
+	"github.com/d3vzero/whyd-init/internal/rules"
 )
 
 // WHYD_LIVE=1 go test -run TestSelection ./internal/analyze checks, on every boot of this

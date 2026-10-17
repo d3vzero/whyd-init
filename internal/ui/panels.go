@@ -9,9 +9,9 @@ import (
 	"charm.land/lipgloss/v2"
 	"github.com/charmbracelet/x/ansi"
 
-	"github.com/vmaltarello/whyd/internal/analyze"
-	"github.com/vmaltarello/whyd/internal/report"
-	"github.com/vmaltarello/whyd/internal/rules"
+	"github.com/d3vzero/whyd-init/internal/analyze"
+	"github.com/d3vzero/whyd-init/internal/report"
+	"github.com/d3vzero/whyd-init/internal/rules"
 )
 
 const (

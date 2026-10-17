@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/vmaltarello/whyd/internal/analyze"
+	"github.com/d3vzero/whyd-init/internal/analyze"
 )
 
 // A file with the right key and no sessions must give an empty cache, not a nil map that

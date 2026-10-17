@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/vmaltarello/whyd/internal/analyze"
-	"github.com/vmaltarello/whyd/internal/rules"
+	"github.com/d3vzero/whyd-init/internal/analyze"
+	"github.com/d3vzero/whyd-init/internal/rules"
 )
 
 // Now is the clock used for relative times; tests replace it.

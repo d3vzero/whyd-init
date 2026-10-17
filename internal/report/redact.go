@@ -10,7 +10,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/vmaltarello/whyd/internal/analyze"
+	"github.com/d3vzero/whyd-init/internal/analyze"
 )
 
 // Redactor hides what identifies a machine or a person: MAC and IP addresses, serial numbers,

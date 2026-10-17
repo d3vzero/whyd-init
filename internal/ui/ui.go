@@ -11,10 +11,10 @@ import (
 
 	tea "charm.land/bubbletea/v2"
 
-	"github.com/vmaltarello/whyd/internal/analyze"
-	"github.com/vmaltarello/whyd/internal/journal"
-	"github.com/vmaltarello/whyd/internal/report"
-	"github.com/vmaltarello/whyd/internal/rules"
+	"github.com/d3vzero/whyd-init/internal/analyze"
+	"github.com/d3vzero/whyd-init/internal/journal"
+	"github.com/d3vzero/whyd-init/internal/report"
+	"github.com/d3vzero/whyd-init/internal/rules"
 )
 
 // Recent is how far back the sessions list goes at first; each "older" step adds as much again.

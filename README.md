@@ -1,3 +1,11 @@
+> **whyd-init** is a fork of [vmaltarello/whyd](https://github.com/vmaltarello/whyd) (GPL-3.0)
+> for systems **without systemd/journald**, such as Artix Linux with dinit or runit. Besides the
+> journal it reads the syslog files written by
+> [dotfiles-aro.minimal](https://github.com/d3vzero/dotfiles-aro.minimal) (`/var/log/aro`,
+> `LOG_PERSIST=yes`): boot and clean-shutdown markers from its `aro-bootlog` service, and kernel
+> crash records kept by pstore. Build: `go build -o whyd ./cmd/whyd`.
+> `WHYD_BACKEND=syslog|journal` and `WHYD_SYSLOG_DIR` override the detection.
+
 <div align="center">
 
 <picture>

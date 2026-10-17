@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/vmaltarello/whyd/internal/journal"
+	"github.com/d3vzero/whyd-init/internal/journal"
 )
 
 // EndKind is how a boot ended.

@@ -13,12 +13,12 @@ import (
 	"runtime/debug"
 	"strings"
 
-	"github.com/vmaltarello/whyd/internal/analyze"
-	"github.com/vmaltarello/whyd/internal/cache"
-	"github.com/vmaltarello/whyd/internal/journal"
-	"github.com/vmaltarello/whyd/internal/report"
-	"github.com/vmaltarello/whyd/internal/rules"
-	"github.com/vmaltarello/whyd/internal/ui"
+	"github.com/d3vzero/whyd-init/internal/analyze"
+	"github.com/d3vzero/whyd-init/internal/cache"
+	"github.com/d3vzero/whyd-init/internal/journal"
+	"github.com/d3vzero/whyd-init/internal/report"
+	"github.com/d3vzero/whyd-init/internal/rules"
+	"github.com/d3vzero/whyd-init/internal/ui"
 )
 
 // version is set by the release build; go install takes it from the module version.

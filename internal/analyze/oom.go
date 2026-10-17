@@ -8,7 +8,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/vmaltarello/whyd/internal/rules"
+	"github.com/d3vzero/whyd-init/internal/rules"
 )
 
 // OOMReport is what the kernel's out-of-memory report says about where the memory went.

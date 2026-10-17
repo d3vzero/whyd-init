@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/vmaltarello/whyd/internal/journal"
+	"github.com/d3vzero/whyd-init/internal/journal"
 )
 
 // Event is one problem (or a burst of the same problem) recognised by a rule.

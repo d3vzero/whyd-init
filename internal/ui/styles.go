@@ -6,7 +6,7 @@ import (
 	"charm.land/lipgloss/v2"
 	"github.com/charmbracelet/x/ansi"
 
-	"github.com/vmaltarello/whyd/internal/analyze"
+	"github.com/d3vzero/whyd-init/internal/analyze"
 )
 
 // Only the terminal's own palette, and colour only where it means something: red for errors and

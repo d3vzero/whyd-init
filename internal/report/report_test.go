@@ -6,9 +6,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/vmaltarello/whyd/internal/analyze"
-	"github.com/vmaltarello/whyd/internal/journal"
-	"github.com/vmaltarello/whyd/internal/rules"
+	"github.com/d3vzero/whyd-init/internal/analyze"
+	"github.com/d3vzero/whyd-init/internal/journal"
+	"github.com/d3vzero/whyd-init/internal/rules"
 )
 
 func TestRedact(t *testing.T) {

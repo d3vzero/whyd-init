@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/vmaltarello/whyd/internal/analyze"
+	"github.com/d3vzero/whyd-init/internal/analyze"
 )
 
 // Cache maps boot IDs to summaries. It is safe for concurrent use.
